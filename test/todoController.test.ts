@@ -23,6 +23,23 @@ describe("Todo Controller", () => {
     expect(response.status).toBe(200);
   });
 
+  test("GET /todo/:id should return a todo item", async () => {
+    const todo = await (await Todo.create({
+      title: "Something",
+    })).get();
+    const response = await request(app)
+      .get("/todo/" + todo.id)
+      .auth("admin", "NotSoSecurePassword");
+    expect(response.status).toBe(200);
+  });
+
+  test("GET /todo/:id should return a 400 for a non existing item", async () => {
+    const response = await request(app)
+      .get("/todo/someid")
+      .auth("admin", "NotSoSecurePassword");
+    expect(response.status).toBe(400);
+  });
+
   test("POST /todo should create a new todo", async () => {
     const response = await request(app)
       .post("/todo")
@@ -33,6 +50,15 @@ describe("Todo Controller", () => {
     expect(response.body).toHaveProperty("id");
     expect(response.body.title).toBe("Buy groceries");
     expect(response.body.completed).toBe(false);
+  });
+
+  test("POST /todo should return a 400 when the title is missing", async () => {
+    const response = await request(app)
+      .post("/todo")
+      .auth("admin", "NotSoSecurePassword")
+      .send({ "some": "thing" });
+
+    expect(response.status).toBe(400);
   });
 
   test("PATCH /todo should update a todo", async () => {
@@ -61,5 +87,14 @@ describe("Todo Controller", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.success).toBe("Item deleted");
+  });
+
+  test("DELETE /todo should return a 400 when the item is missing", async () => {
+    const response = await request(app)
+      .delete("/todo/someId")
+      .auth("admin", "NotSoSecurePassword")
+      .send({ title: "Buy groceries" });
+
+    expect(response.status).toBe(400);
   });
 });
