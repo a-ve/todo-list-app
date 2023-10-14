@@ -10,7 +10,7 @@ Built using Typescript, Express, Sequelize with Postgres
 2. Clone this repo and build the Docker image for this project:
    `docker build -t todo .`
 3. Run the newly built image:
-   `docker run -d --net host localhost/todo`
+   `docker run -d --net host --env DB_USERNAME=postgres --env DB_PASSWORD=postgres --env DB_NAME=todo todo`
 
 #### Supported Endpoints and HTTP Verbs
 
