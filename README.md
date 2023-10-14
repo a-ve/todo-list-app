@@ -27,4 +27,7 @@ Note: The default username and password for this endpoint is admin:NotSoSecurePa
 
 #### Testing
 
-Run `npm install` and `npm run test` to run tests
+1. Run `npm install`
+2. Make sure a postgres container is running from the above steps.
+3. Run `npx sequelize-cli db:create` and then `npx sequelize-cli db:migrate`
+4. Finally, run `npm run test`
