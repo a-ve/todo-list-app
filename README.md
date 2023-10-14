@@ -1,6 +1,6 @@
 # A simple backend for a to-do list
 
-Built using Typescript, Express, Sequelize with Postgres
+Built using Typescript, Express, Sequelize with Postgres. Tested using Node v18.17.1 and NPM v9.6.7.
 
 #### Installation
 
