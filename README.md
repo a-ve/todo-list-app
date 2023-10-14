@@ -1,16 +1,20 @@
 # A simple backend for a to-do list
 
+Built using Typescript, Express, Sequelize with Postgres
+
 #### Installation
 
-0. Spin up an Ubuntu EC2 instance with ports 80 and 22 open and install Docker on it (https://docs.docker.com/engine/install/ubuntu/)
+0. Spin up an Ubuntu EC2 instance with ports 3000 and 22 open and install Docker on it (https://docs.docker.com/engine/install/ubuntu/)
 1. Make sure you have a postgres container running:
    `docker run --name postgres -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:alpine`
-2. Build the Docker image for this project:
+2. Clone this repo and build the Docker image for this project:
    `docker build -t todo .`
 3. Run the newly built image:
    `docker run -d --net host localhost/todo`
 
 #### Supported Endpoints and HTTP Verbs
+
+Note: The default username and password for this endpoint is admin:NotSoSecurePassword
 
 1. `/todo`:
    - `GET /`: Returns all todo items
